@@ -1,7 +1,14 @@
 package com.fatec.plataforma.model;
 
 import java.util.UUID;
+import lombok.*;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class PedidoModel {
 
     // Classe Pedido

@@ -3,33 +3,24 @@ package com.fatec.plataforma.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.*;
+
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class CarrinhoModel {
+    private int id;
+    private boolean aberto = true;
+    private static long totInst;
+    private ArrayList<ProdutoModel> produtoModels = new ArrayList<ProdutoModel>();
+
+
+    public ArrayList<ProdutoModel> getProdutos() {
+        return produtoModels;
+    }
     private List<PedidoModel> pedidoModels;
-
-    public CarrinhoModel() {
-        this.pedidoModels = new ArrayList<>();
-    }
-
-    // Método para adicionar um pedido ao carrinho
-    public void adicionarAoCarrinho(PedidoModel pedidoModel) {
-        this.pedidoModels.add(pedidoModel);
-        System.out.println("Pedido adicionado ao carrinho: " + pedidoModel);
-    }
-
-    // Método para calcular o total do carrinho
-    public double calcularTotalCarrinho() {
-        double total = 0;
-        for (PedidoModel pedidoModel : pedidoModels) {
-            total += pedidoModel.calcularPrecoTotal();
-        }
-        return total;
-    }
-    public void adicionarProduto(PedidoModel pedidoModel) {
-        this.pedidoModels.add(pedidoModel);
-        System.out.println("Pedido adicionado ao carrinho: " + pedidoModel);
-    }
-    public List<PedidoModel> getPedidos() {
-        return pedidoModels;
-    }
 }
 
