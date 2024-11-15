@@ -16,14 +16,14 @@
             </div>
             <ul>
                 <li class="iten-menu">
-                    <a href="/usuarios/home">
+                    <a href="/usuarioModels/home">
                         <span class="icon"><i class="bi bi-house-door" ></i></span>
                         <span class="txt-link">Inicio</span>
                     </a>
                 </li>
 
                 <li class="iten-menu ativo">
-                    <a href="/usuarios/catalogo">
+                    <a href="/usuarioModels/catalogo">
                         <span class="icon"><i class="bi bi-bag"></i></span>
                         <span class="txt-link">Catálogo</span>
                     </a>
@@ -94,14 +94,14 @@
             <h2 class="titulo-catalog">Recompensas Disponíveis!</h2>
   
 			<!-- Catalogo -->
-			        <div class="vitrine" th:each="produto : ${produtos}">
-			            <div class="produto">
-			                <h3 th:text="${produto.nome}"></h3>
+			        <div class="vitrine" th:each="produtoModel : ${produtoModels}">
+			            <div class="produtoModel">
+			                <h3 th:text="${produtoModel.nome}"></h3>
 			                <div class="box">
-			                    <img class="vitrine-img" th:src="@{${produto.img}}" alt="Imagem do Produto">
+			                    <img class="vitrine-img" th:src="@{${produtoModel.img}}" alt="Imagem do Produto">
 			                    <div class="overlay">
-			                        <h3 th:text="${produto.points} + ' Pontos'"></h3>
-			                        <h5 th:text="${produto.descricao}"></h5>
+			                        <h3 th:text="${produtoModel.points} + ' Pontos'"></h3>
+			                        <h5 th:text="${produtoModel.descricao}"></h5>
 			                    </div>
 			                </div>
 			                <form action="carrinho.php" method="post">
@@ -117,7 +117,7 @@
             
             <div class="company-info">
                 <p>LAUREAR. CNPJ: xx.xxx.xxx/xxxx-xx - Inscrição Estadual: xxx.xxx.xxx.xxx <br>
-                O catálogo de prêmios é atualizado periódica e automaticamente pelos parceiros e os produtos e preços poderão
+                O catálogo de prêmios é atualizado periódica e automaticamente pelos parceiros e os produtoModels e preços poderão
                 sofrer
                 alterações durante a navegação, <br> sem aviso prévio, devendo ser consultados pelo interessado no momento da
                 conclusão <br>
@@ -323,7 +323,7 @@
 
 
 			/* ----------------- Imagens da Vitrine -------------------*/
-			div.produto h3{
+			div.produtoModel h3{
 			    color: #3046a6;
 			    font-weight: bold;
 			    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

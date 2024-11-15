@@ -25,12 +25,12 @@
 
 				</thead>
 				<tbody>
-					<tr th:each="produto : ${produtos}">
-						<td th:text="${produto.id}"></td>
-						<td th:text="${produto.nome}"></td>
-						<td th:text="${produto.descricao}"></td>
-						<td th:text="${produto.points}"></td>
-						<td th:text="${produto.img}"></td>
+					<tr th:each="produtoModel : ${produtoModels}">
+						<td th:text="${produtoModel.id}"></td>
+						<td th:text="${produtoModel.nome}"></td>
+						<td th:text="${produtoModel.descricao}"></td>
+						<td th:text="${produtoModel.points}"></td>
+						<td th:text="${produtoModel.img}"></td>
 					</tr>
 				</tbody>
 			</table>

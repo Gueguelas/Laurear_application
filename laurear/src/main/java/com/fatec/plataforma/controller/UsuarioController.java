@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.fatec.plataforma.model.UsuarioModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.fatec.plataforma.model.Produto;
-import com.fatec.plataforma.model.Usuario;
+import com.fatec.plataforma.model.ProdutoModel;
 import com.fatec.plataforma.repository.UsuarioRepository;
 import com.fatec.plataforma.repository.ProdutoRepository;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping()
 public class UsuarioController {
 	
     @Autowired
@@ -35,16 +35,16 @@ public class UsuarioController {
 	@GetMapping("/produtos")
 	public ModelAndView getProdutosCadastrados() {
 		ModelAndView modelAndView = new ModelAndView("tb_produtos.html");
-		List<Produto> produtos = produtoRepository.findAll();
-		modelAndView.addObject("produtos", produtos);
-		modelAndView.addObject("produto", new Produto());
+		List<ProdutoModel> produtoModels = produtoRepository.findAll();
+		modelAndView.addObject("produtos", produtoModels);
+		modelAndView.addObject("produto", new ProdutoModel());
 		return modelAndView;
 	}
 	
 	// PAGINA LOGIN-PRINCIPAL
 	@GetMapping("/login")
 	public String showLoginForm(Model model) {
-	    model.addAttribute("usuario", new Usuario()); 
+	    model.addAttribute("usuario", new UsuarioModel());
 	    return "usuario_login"; // O nome do template Thymeleaf
 	}
 
@@ -52,7 +52,7 @@ public class UsuarioController {
     @PostMapping("/login")
     public ModelAndView authenticateUser(@RequestParam String cpf, @RequestParam String senha) {
         ModelAndView modelAndView = new ModelAndView();
-        Optional<Usuario> usuario = usuarioRepository.findByCpf(cpf);
+        Optional<UsuarioModel> usuario = usuarioRepository.findByCpf(cpf);
         if (usuario.isPresent() && usuario.get().getSenha().equals(senha)) {
             modelAndView.setView(new RedirectView("/usuarios/home"));
         } else {
@@ -67,9 +67,9 @@ public class UsuarioController {
 	@GetMapping("/cadastro")
 	public ModelAndView getUsuariosCadastro() {
 		ModelAndView modelAndView = new ModelAndView("usuario_cadastro.html");
-		List<Usuario> usuarios = usuarioRepository.findAll();
-		modelAndView.addObject("usuarios", usuarios);
-		modelAndView.addObject("usuario", new Usuario());
+		List<UsuarioModel> usuarioModels = usuarioRepository.findAll();
+		modelAndView.addObject("usuarios", usuarioModels);
+		modelAndView.addObject("usuario", new UsuarioModel());
 		return modelAndView;
 	}
 	
@@ -77,32 +77,32 @@ public class UsuarioController {
 	@GetMapping
 	public ModelAndView getUsuariosCadastrando() {
 		ModelAndView modelAndView = new ModelAndView("tb_usuarios_cadastrados.html");
-		List<Usuario> usuarios = usuarioRepository.findAll();
-		modelAndView.addObject("usuarios", usuarios);
-		modelAndView.addObject("usuario", new Usuario());
+		List<UsuarioModel> usuarioModels = usuarioRepository.findAll();
+		modelAndView.addObject("usuarios", usuarioModels);
+		modelAndView.addObject("usuario", new UsuarioModel());
 		return modelAndView;
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView getUsuarioById(@PathVariable Long id) {
 		ModelAndView modelAndView = new ModelAndView("tb_usuarios_cadastrados.html");
-		Usuario usuario = usuarioRepository.getReferenceById(id);
-		List<Usuario> usuarios = new ArrayList<>();
-		usuarios.add(usuario);
-		modelAndView.addObject("usuarios", usuario);
-		modelAndView.addObject("usuario", new Usuario());
+		UsuarioModel usuarioModel = usuarioRepository.getReferenceById(id);
+		List<UsuarioModel> usuarioModels = new ArrayList<>();
+		usuarioModels.add(usuarioModel);
+		modelAndView.addObject("usuarios", usuarioModel);
+		modelAndView.addObject("usuario", new UsuarioModel());
 		return modelAndView;
 	}
 	
 	 @PostMapping
-	   public ModelAndView saveUsuario(Usuario usuario) {
+	   public ModelAndView saveUsuario(UsuarioModel usuarioModel) {
 	       ModelAndView modelAndView = new ModelAndView();
-	       Optional<Usuario> existingUsuario = usuarioRepository.findByCpf(usuario.getCpf());
+	       Optional<UsuarioModel> existingUsuario = usuarioRepository.findByCpf(usuarioModel.getCpf());
 	       if (existingUsuario.isPresent()) {
 	           modelAndView.setViewName("usuario_cadastro");
 	           modelAndView.addObject("message", "CPF já cadastrado!!");
 	       } else {
-	    	   usuarioRepository.save(usuario);
+	    	   usuarioRepository.save(usuarioModel);
 	           modelAndView.setView(new RedirectView("usuarios/login"));
 	       }
 	       
@@ -130,9 +130,9 @@ public class UsuarioController {
 		@GetMapping("/catalogo")
 		public ModelAndView getProdutos() {
 		    ModelAndView modelAndView = new ModelAndView("page_catalogo.html"); // Certifique-se que o nome do template está correto
-		    List<Produto> produtos = produtoRepository.findAll();
-		    modelAndView.addObject("produtos", produtos);
-		    modelAndView.addObject("produto", new Produto());
+		    List<ProdutoModel> produtoModels = produtoRepository.findAll();
+		    modelAndView.addObject("produtos", produtoModels);
+		    modelAndView.addObject("produto", new ProdutoModel());
 		    return modelAndView;
 		}
 
@@ -140,9 +140,9 @@ public class UsuarioController {
 		@GetMapping("/carrinho")
 		public ModelAndView getProdutoInCart() {
 		    ModelAndView modelAndView = new ModelAndView("page_carrinho.html"); // Certifique-se que o nome do template está correto
-		    List<Produto> produtos = produtoRepository.findAll();
-		    modelAndView.addObject("produtos", produtos);
-		    modelAndView.addObject("produto", new Produto());
+		    List<ProdutoModel> produtoModels = produtoRepository.findAll();
+		    modelAndView.addObject("produtos", produtoModels);
+		    modelAndView.addObject("produto", new ProdutoModel());
 		    return modelAndView;
 		}
 		

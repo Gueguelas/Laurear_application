@@ -1,10 +1,10 @@
 package com.fatec.plataforma.service;
 
+import com.fatec.plataforma.model.UsuarioModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.fatec.plataforma.model.Usuario;
 import com.fatec.plataforma.repository.UsuarioRepository;
 
 import java.util.Optional;
@@ -15,8 +15,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario authenticate(String cpf, String senha) throws Exception {
-        Optional<Usuario> usuario = repository.findByCpf(cpf);
+    public UsuarioModel authenticate(String cpf, String senha) throws Exception {
+        Optional<UsuarioModel> usuario = repository.findByCpf(cpf);
         if (usuario.isPresent() && usuario.get().getSenha().equals(senha)) {
             return usuario.get();
         }
@@ -24,9 +24,9 @@ public class UsuarioService {
     }
 
     // Método para adicionar usuário
-    public RedirectView addUser(Usuario usuario) throws Exception {
-        Optional<Usuario> existingEmail = repository.findByEmail(usuario.getEmail());
-        Optional<Usuario> existingCpf = repository.findByCpf(usuario.getCpf());
+    public RedirectView addUser(UsuarioModel usuarioModel) throws Exception {
+        Optional<UsuarioModel> existingEmail = repository.findByEmail(usuarioModel.getEmail());
+        Optional<UsuarioModel> existingCpf = repository.findByCpf(usuarioModel.getCpf());
 
         if (existingEmail.isPresent()) {
             throw new Exception("Email já cadastrado");
@@ -36,7 +36,7 @@ public class UsuarioService {
             throw new Exception("CPF já cadastrado");
         }
 
-        repository.save(usuario);
+        repository.save(usuarioModel);
 
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/usuarios");

@@ -20,8 +20,8 @@
 
 	<script>
 			function excluirUsuario(id) {
-				if (confirm('Você realmente deseja excluir este usuario?')) {
-					fetch(`/usuarios/${id}`, {method: 'DELETE'});
+				if (confirm('Você realmente deseja excluir este usuarioModel?')) {
+					fetch(`/usuarioModels/${id}`, {method: 'DELETE'});
 				}
 			}
 			
@@ -34,7 +34,7 @@
 	
 <!--	<div class="form-container">-->
 <!--	    <h2>Adicionar Novo Usuário</h2>-->
-<!--		<form class="for-inline" method="POST" th:action="@{/usuarios}" style="margin: 20px" th:object="${usuario}">-->
+<!--		<form class="for-inline" method="POST" th:action="@{/usuarioModels}" style="margin: 20px" th:object="${usuarioModel}">-->
 <!--				<div class="form-group">-->
 <!--					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" />-->
 <!--					<input type="email" class="form-control" placeholder="Email" th:field="*{email}" />-->
@@ -63,14 +63,14 @@
 						<th>Deletar</th>
 				</thead>
 				<tbody>
-					<tr th:each="usuario : ${usuarios}">
-						<td th:text="${usuario.id}"></td>
-						<td th:text="${usuario.nome}"></td>
-						<td th:text="${usuario.email}"></td>
-						<td th:text="${usuario.cpf}"></td>
-						<td th:text="${usuario.senha}"></td>
+					<tr th:each="usuarioModel : ${usuarioModels}">
+						<td th:text="${usuarioModel.id}"></td>
+						<td th:text="${usuarioModel.nome}"></td>
+						<td th:text="${usuarioModel.email}"></td>
+						<td th:text="${usuarioModel.cpf}"></td>
+						<td th:text="${usuarioModel.senha}"></td>
 						<td><a href="#" class="text-danger"
-						th:onclick="'excluirUsuario(' + ${usuario.id} + ')'">Excluir</a></td>
+						th:onclick="'excluirUsuario(' + ${usuarioModel.id} + ')'">Excluir</a></td>
 					</tr>
 				</tbody>
 			</table>
