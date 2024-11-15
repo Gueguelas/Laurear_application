@@ -23,7 +23,7 @@ public class AlunoModel {
     private List<CupomModel> cupons;
     private LocalDateTime dataCadastro;
 
-    
+
     public List<CupomModel> ListarCupons() {
         return this.cupons;
     }
