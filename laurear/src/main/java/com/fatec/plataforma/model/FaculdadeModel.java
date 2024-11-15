@@ -3,6 +3,8 @@ package com.fatec.plataforma.model;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -11,15 +13,30 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Entity
+@Table(name = "Faculdade")
 public class FaculdadeModel {
-        private UUID idEmpresa;
-        private String nome;
-        private String telefone;
-        private String email;
-        private String senha;
-        private EnderecoModel endereco;
-        private List<AlunoModel> alunos;
-        private List<CupomModel> cupons;
-        private LocalDateTime dataCadastro;
+        @Id
+        @Column(name = "idFaculdade")
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        private int idFaculdade;
 
+        @Column(name = "nome")
+        private String nome;
+
+        @Column(name = "telefone")
+        private String telefone;
+
+        @Column(name = "email")
+        private String email;
+
+        @Column(name = "senha")
+        private String senha;
+
+        @ManyToOne
+        @JoinColumn(name = "idEndereco")
+        private EnderecoModel endereco;
+
+        @OneToMany(mappedBy = "faculdade")
+        private List<CupomModel> cupons;
 }

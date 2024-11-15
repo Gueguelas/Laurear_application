@@ -1,8 +1,10 @@
 package com.fatec.plataforma.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -11,17 +13,25 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Entity
+@Table(name = "Avaliacao")
 public class AvaliacaoModel {
-    private UUID idAvaliacao;
-    private UUID idAluno;
-    private UUID idCupom;
-    private int nota;
-    private String feedback;
-    private LocalDateTime timestampFeedback;
+        @Id
+        @Column(name = "idAvaliacao")
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        private UUID idAvaliacao;
 
-    public void AvaliarCupom(int nota, String feedback) {
-        this.nota = nota;
-        this.feedback = feedback;
-        this.timestampFeedback = LocalDateTime.now();
-    }
+        @Column(name = "descricao")
+        private String descricao;
+
+        @Column(name = "feedback")
+        private String feedback;
+
+        @Column(name = "data")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date data;
+
+        @ManyToOne
+        @JoinColumn(name = "idAluno")
+        private AlunoModel aluno;
 }

@@ -1,6 +1,8 @@
 package com.fatec.plataforma.model;
 
 import java.util.UUID;
+
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -9,14 +11,35 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Entity
+@Table(name = "Endereco")
 public class EnderecoModel {
 
-        private UUID idEndereco;
+        @Id
+        @Column(name = "idEndereco")
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        private int idEndereco;
+
+        @Column(name = "logradouro")
         private String logradouro;
-        private String numero;
-        private int cep;
+
+        @Column(name = "numero")
+        private int numero;
+
+        @Column(name = "complemento")
+        private String complemento;
+
+        @Column(name = "cidade")
         private String cidade;
+
+        @Column(name = "estado")
         private String estado;
+
+        @Column(name = "pais")
         private String pais;
+
+        @Column(name = "cep")
+        private String cep;
+
 
 }

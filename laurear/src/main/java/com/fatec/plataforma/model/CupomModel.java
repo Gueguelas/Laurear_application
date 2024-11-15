@@ -1,7 +1,10 @@
 package com.fatec.plataforma.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
+
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -10,13 +13,38 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Entity
+@Table(name = "CupomModel")
 public class CupomModel {
 
-    private UUID idCupom;
+    @Id
+    @Column(name = "idCupom")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int idCupom;
+
+    @Column(name = "nome")
     private String nome;
-    private String loja;
-    private StatusEnum status;
-    private LocalDateTime dataExpiracao;
+
+    @Column(name = "tipo")
+    private String tipo;
+
+    @Column(name = "validade")
+    @Temporal(TemporalType.DATE)
+    private Date validade;
+
+    @Column(name = "status")
+    private String status; // "Disponivel" ou "Indisponivel"
+
+    @Column(name = "valor")
     private int valor;
+
+    @ManyToOne
+    @JoinColumn(name = "idAluno")
+    private AlunoModel aluno;
+
+    @ManyToOne
+    @JoinColumn(name = "idFaculdade")
+    private FaculdadeModel faculdade;
+
 
 }
