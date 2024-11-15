@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Cadastrados</title>
+
+	<script>
+			function excluirUsuario(id) {
+				if (confirm('Você realmente deseja excluir este usuario?')) {
+					fetch(`/usuarios/${id}`, {method: 'DELETE'});
+				}
+			}
+			
+	</script>
+
+
+</head>
+
+<body>
+	
+<!--	<div class="form-container">-->
+<!--	    <h2>Adicionar Novo Usuário</h2>-->
+<!--		<form class="for-inline" method="POST" th:action="@{/usuarios}" style="margin: 20px" th:object="${usuario}">-->
+<!--				<div class="form-group">-->
+<!--					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" />-->
+<!--					<input type="email" class="form-control" placeholder="Email" th:field="*{email}" />-->
+<!--					<input type="text" class="form-control" placeholder="CPF" th:field="*{cpf}" />-->
+<!--					<input type="password" class="form-control" placeholder="Senha" th:field="*{senha}" />-->
+
+<!--					<button type="submit" class="btn btn-primary">Adicionar</button>-->
+<!--				</div>-->
+<!--		</form>-->
+<!--	</div>-->
+	
+	
+	
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Usuarios Cadastrados</h1>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+						<th>id</th>
+						<th>nome</th>
+						<th>email</th>
+						<th>cpf</th>
+						<th>senha</th>
+						<th>Deletar</th>
+				</thead>
+				<tbody>
+					<tr th:each="usuario : ${usuarios}">
+						<td th:text="${usuario.id}"></td>
+						<td th:text="${usuario.nome}"></td>
+						<td th:text="${usuario.email}"></td>
+						<td th:text="${usuario.cpf}"></td>
+						<td th:text="${usuario.senha}"></td>
+						<td><a href="#" class="text-danger"
+						th:onclick="'excluirUsuario(' + ${usuario.id} + ')'">Excluir</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+	<style>
+	        table {
+	            width: auto;
+	            border-collapse: collapse;
+	            margin: auto;
+	        }
+
+	        th, td {
+	            border: 1px solid #dddddd;
+	            text-align: left;
+	            padding: 8px;
+	            white-space: nowrap; /* This ensures the text does not wrap and cells expand */
+	        }
+
+	        th {
+	            background-color: #f2f2f2;
+	        }
+
+	        tr:nth-child(even) {
+	            background-color: #f9f9f9;
+	        }
+
+	        tr:hover {
+	            background-color: #e9e9e9;
+	        }
+
+	        .panel {
+	            margin: 10px auto;
+	            width: fit-content;
+	        }
+	    </style>
+
+</html>

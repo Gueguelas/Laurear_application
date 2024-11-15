@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Produtos Cadastrados</title>
+
+
+</head>
+
+<body>
+
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Produtos Cadastrados</h1>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+						<th>id</th>
+						<th>nome</th>
+						<th>descricao</th>
+						<th>points</th>
+						<th>img</th>
+
+				</thead>
+				<tbody>
+					<tr th:each="produto : ${produtos}">
+						<td th:text="${produto.id}"></td>
+						<td th:text="${produto.nome}"></td>
+						<td th:text="${produto.descricao}"></td>
+						<td th:text="${produto.points}"></td>
+						<td th:text="${produto.img}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+	<style>
+	        table {
+	            width: auto;
+	            border-collapse: collapse;
+	            margin: auto;
+	        }
+
+	        th, td {
+	            border: 1px solid #dddddd;
+	            text-align: left;
+	            padding: 8px;
+	            white-space: nowrap; /* This ensures the text does not wrap and cells expand */
+	        }
+
+	        th {
+	            background-color: #f2f2f2;
+	        }
+
+	        tr:nth-child(even) {
+	            background-color: #f9f9f9;
+	        }
+
+	        tr:hover {
+	            background-color: #e9e9e9;
+	        }
+
+	        .panel {
+	            margin: 10px auto;
+	            width: fit-content;
+	        }
+	    </style>
+
+</html>
