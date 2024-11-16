@@ -5,5 +5,5 @@ import com.fatec.plataforma.model.EnderecoModel;
 
 import java.util.List;
 
-public record FaculdadeDTO(int idFaculdade, String nome, String telefone, String email, String senha, EnderecoModel endereco, List<CupomModel> cupons) {
+public record FaculdadeDTO(int idFaculdade, String nome, String telefone, String email, String senha, EnderecoModel endereco) {
 }

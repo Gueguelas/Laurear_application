@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "Faculdade")
+@Table(name = "faculdade")
 public class FaculdadeModel {
         @Id
         @Column(name = "idFaculdade")
@@ -37,6 +37,7 @@ public class FaculdadeModel {
         @JoinColumn(name = "idEndereco")
         private EnderecoModel endereco;
 
-        @OneToMany(mappedBy = "faculdade")
-        private List<CupomModel> cupons;
+        public FaculdadeModel(int idFaculdade) {
+                this.idFaculdade = idFaculdade;
+        }
 }

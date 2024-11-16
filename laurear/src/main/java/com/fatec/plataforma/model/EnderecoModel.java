@@ -12,12 +12,12 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "Endereco")
+@Table(name = "endereco")
 public class EnderecoModel {
 
         @Id
         @Column(name = "idEndereco")
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int idEndereco;
 
         @Column(name = "logradouro")

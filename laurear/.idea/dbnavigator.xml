@@ -6,8 +6,89 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
+  </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+  </component>
+  <component name="DBNavigator.Project.DatabaseConsoleManager">
+    <connection id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac">
+      <console name="Connection" type="STANDARD" schema="laurear" session="Main"><![CDATA[CREATE DATABASE laurear;
+USE laurear;
+
+-- Tabela Endereco
+CREATE TABLE Endereco (
+    idEndereco CHAR(36) PRIMARY KEY,
+    logradouro VARCHAR(255),
+    numero INT,
+    complemento VARCHAR(255),
+    cidade VARCHAR(255),
+    estado VARCHAR(2),
+    pais VARCHAR(50),
+    cep VARCHAR(20)
+);
+
+-- Tabela Aluno
+CREATE TABLE Aluno (
+    idAluno CHAR(36) PRIMARY KEY,
+    matricula INT NOT NULL,
+    nome VARCHAR(255),
+    sobrenome VARCHAR(255),
+    telefone VARCHAR(20),
+    email VARCHAR(255),
+    senha VARCHAR(255),
+    pontos INT,
+    dataNascimento DATETIME,
+    idEndereco CHAR(36),
+    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco)
+);
+
+-- Tabela Faculdade
+CREATE TABLE Faculdade (
+    idFaculdade CHAR(36) PRIMARY KEY,
+    nome VARCHAR(255),
+    telefone VARCHAR(20),
+    email VARCHAR(255),
+    senha VARCHAR(255),
+    idEndereco CHAR(36),
+    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco)
+);
+
+
+-- Tabela Cupons
+CREATE TABLE Cupons (
+    idCupom CHAR(36) PRIMARY KEY,
+    nome VARCHAR(255),
+    tipo VARCHAR(50),
+    validade DATE,
+    status ENUM('Disponivel', 'Indisponivel'),
+    valor INT,
+    idAluno CHAR(36),
+    idFaculdade CHAR(36),
+    FOREIGN KEY (idAluno) REFERENCES Aluno(idAluno),
+    FOREIGN KEY (idFaculdade) REFERENCES Faculdade(idFaculdade)
+);
+
+-- Tabela Avaliacao
+CREATE TABLE Avaliacao (
+    idAvaliacao CHAR(36) PRIMARY KEY,
+    descricao TEXT,
+    feedback VARCHAR(255),
+    data DATETIME,
+    idAluno CHAR(36),
+    FOREIGN KEY (idAluno) REFERENCES Aluno(idAluno)
+);
+
+-- Tabela para Enum de Status de Cupom (opcional, depende da implementação)
+CREATE TABLE Status (
+    idStatus INT PRIMARY KEY AUTO_INCREMENT,
+    nome ENUM('Disponivel', 'Indisponivel') NOT NULL
+);]]></console>
+    </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
@@ -15,8 +96,119 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+  <component name="DBNavigator.Project.DatabaseSessionManager">
+    <connection id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac" dataset="laurear.aluno" active-filter-id="" />
+    <filter-actions connection-id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac" dataset="laurear.Faculdade" active-filter-id="" />
+    <filter-actions connection-id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac" dataset="laurear.faculdade" active-filter-id="" />
+    <filter-actions connection-id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac" dataset="laurear.Aluno" active-filter-id="" />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
   <component name="DBNavigator.Project.Settings">
-    <connections />
+    <connections>
+      <connection id="d0e4b0d4-7af2-4429-9e04-6b9c7c3afbac" active="true" signed="true">
+        <database>
+          <name value="Connection" />
+          <description value="" />
+          <database-type value="MYSQL" />
+          <config-type value="BASIC" />
+          <database-version value="9.1" />
+          <driver-source value="BUNDLED" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="localhost" />
+          <port value="3306" />
+          <database value="mysql" />
+          <tns-folder value="" />
+          <tns-profile value="" />
+          <type value="USER_PASSWORD" />
+          <user value="root" />
+          <deprecated-pwd value="MTIzNA==" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="30" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <debugger>
+          <compile-dependencies value="true" />
+          <tcp-driver-tunneling value="false" />
+          <tcp-host-address value="" />
+          <tcp-port-from value="4000" />
+          <tcp-port-to value="4999" />
+          <debugger-type value="ASK" />
+        </debugger>
+        <object-filters hide-empty-schemas="true" hide-pseudo-columns="false" hide-audit-columns="false">
+          <object-filters />
+          <object-type-filter use-master-settings="true">
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+        </object-filters>
+      </connection>
+    </connections>
     <browser-settings>
       <general>
         <display-mode value="TABBED" />

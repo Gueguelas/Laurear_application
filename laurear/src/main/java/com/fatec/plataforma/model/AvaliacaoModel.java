@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "Avaliacao")
+@Table(name = "avaliacao")
 public class AvaliacaoModel {
         @Id
         @Column(name = "idAvaliacao")
